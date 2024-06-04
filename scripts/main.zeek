@@ -19,11 +19,11 @@ function agenttesla_ftp_match(state: signature_state, data: string): bool &is_us
 	return T;
 	}
 
-# Signature match function for SMTP/Generic/Not FTP
-function agenttesla_match(state: signature_state, data: string): bool &is_used
+# Signature match function for SMTP
+function agenttesla_smtp_match(state: signature_state, data: string): bool &is_used
 	{
 	local id = state$conn$id;
-	local msg = fmt("Potential AgentTesla C2 between source %s and dest %s (is_orig=%s) with payload in the sub field.",
+	local msg = fmt("Potential AgentTesla C2 over SMTP between source %s and dest %s (is_orig=%s) with payload in the sub field.",
 			id$orig_h, id$resp_h, state$is_orig);
 
 	# Do not suppress notices.
