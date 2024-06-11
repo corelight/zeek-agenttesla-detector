@@ -5,8 +5,9 @@ This is a Zeek based AgentTesla malware detector.
 ### Testing PCAPs:
 
 - https://app.any.run/tasks/f9421792-7d2c-47d3-90e0-07eb54ae12fa/
-- https://app.any.run/tasks/db9f075c-7879-4957-923a-f79fac957a2d/#
+- https://app.any.run/tasks/db9f075c-7879-4957-923a-f79fac957a2d/
 - https://app.any.run/tasks/a30789ce-1e1c-4f96-a097-78c34b9fb612/
+- https://app.any.run/tasks/0e328ab7-12b2-4843-8717-a5b3ebef33a8
 
 ### Example:
 
