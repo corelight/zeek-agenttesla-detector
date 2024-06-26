@@ -5,15 +5,20 @@ export {
 	redef enum Notice::Type += { C2_Traffic_Observed };
 }
 
-# Signature match function for FTP
-function agenttesla_ftp_match(state: signature_state, data: string): bool &is_used
+# Common logging function
+function logit(c: connection, over_what: string, data: string) 
 	{
-	local id = state$conn$id;
-	local msg = "Potential AgentTesla C2 over FTP data with payload in the sub field.";
+	local msg = fmt("Potential AgentTesla C2 %swith payload in the sub field.", over_what);
 
 	# Do not suppress notices.
 	NOTICE([$note=AgentTesla::C2_Traffic_Observed, $msg=msg, $sub=data,
-		$conn=state$conn]);
+		$conn=c]);
+	}
+
+# Signature match function for FTP
+function agenttesla_ftp_match(state: signature_state, data: string): bool &is_used
+	{
+	logit(state$conn, "over FTP data ", data);
 
 	return T;
 	}
@@ -21,12 +26,7 @@ function agenttesla_ftp_match(state: signature_state, data: string): bool &is_us
 # Signature match function for SMTP/Generic
 function agenttesla_match(state: signature_state, data: string): bool &is_used
 	{
-	local id = state$conn$id;
-	local msg = "Potential AgentTesla C2 with payload in the sub field.";
-
-	# Do not suppress notices.
-	NOTICE([$note=AgentTesla::C2_Traffic_Observed, $msg=msg, $sub=data,
-		$conn=state$conn]);
+	logit(state$conn, "", data);
 
 	return T;
 	}
@@ -34,12 +34,7 @@ function agenttesla_match(state: signature_state, data: string): bool &is_used
 # Signature match function for HTTP
 function agenttesla_http_match(state: signature_state, data: string): bool &is_used
 	{
-	local id = state$conn$id;
-	local msg = "Potential AgentTesla C2 over HTTP with payload in the sub field.";
-
-	# Do not suppress notices.
-	NOTICE([$note=AgentTesla::C2_Traffic_Observed, $msg=msg, $sub=data,
-		$conn=state$conn]);
+	logit(state$conn, "over HTTP ", data);
 
 	return T;
 	}
