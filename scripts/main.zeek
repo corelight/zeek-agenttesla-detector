@@ -1,8 +1,11 @@
 module AgentTesla;
 
 export {
-	## The notice when AgentTesla C2 is observed.
-	redef enum Notice::Type += { C2_Traffic_Observed };
+	redef enum Notice::Type += {
+		## This notice is generated when a connection is potentially Agent
+		## Tesla malware C2.
+		C2_Traffic_Observed
+	};
 }
 
 # Common logging function
